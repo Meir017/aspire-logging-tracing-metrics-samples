@@ -12,19 +12,27 @@ public class WeatherWorker(IHttpClientFactory httpClientFactory, ILogger<Weather
         using var timer = new PeriodicTimer(TimeSpan.FromSeconds(5));
         while (await timer.WaitForNextTickAsync(stoppingToken))
         {
-            using (var activity = activitySource.StartActivity("GetWeatherForecast", ActivityKind.Consumer))
-            {
+            // must be 32 characters long
+            var existingTraceId = Guid.NewGuid().ToString("N");
+
+            var context = new ActivityContext(
+                traceId: ActivityTraceId.CreateFromString(existingTraceId), 
+                spanId: ActivitySpanId.CreateRandom(), 
+                traceFlags: ActivityTraceFlags.Recorded,
+                isRemote: true);
+            using (var activity = activitySource.StartActivity("GetWeatherForecast", ActivityKind.Consumer, context))
+            {                
                 using var client = httpClientFactory.CreateClient("externalapiservice");
                 var forecast = await client.GetFromJsonAsync<WeatherForecast[]>("/weatherforecast", stoppingToken);
                 if (forecast is null)
                 {
                     activity?.SetStatus(ActivityStatusCode.Error, "No weather forecast data received.");
-                    logger.LogWarning("No weather forecast data received.");
+                    logger.LogWarning("No weather forecast data received. {ExistingTraceId}", existingTraceId);
                 }
                 else
                 {
                     activity?.SetStatus(ActivityStatusCode.Ok, "Weather forecast data received successfully.");
-                    logger.LogInformation("Got weather forecasts: {Count}", forecast.Length);
+                    logger.LogInformation("Got weather forecasts: {Count} {ExistingTraceId}", forecast.Length, existingTraceId);
                 }
             }
         }

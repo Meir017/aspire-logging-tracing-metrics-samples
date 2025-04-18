@@ -14,8 +14,6 @@
 > ```
 > See [`ActivitySources.cs`](distributed-app-demo.ServiceDefaults/ActivitySources.cs) for the definition.
 
-Examples using aspire's dashboard:
-
 Multiple activities from a single process:
 
 Traces:
@@ -24,3 +22,26 @@ Traces:
 
 Logs:
 ![multiple-activities-logs](assets/multiple-activities-logs.png)
+
+> **Custom TraceId in Tracing**
+>
+> This sample demonstrates how to create activities with a custom `TraceId` using `ActivityContext`.
+> By providing your own `TraceId`, you can correlate traces across services or processes, or inject a known trace identifier for testing and diagnostics.
+>
+> Example:
+> ```csharp
+> // Must be 32 characters long
+> var existingTraceId = Guid.NewGuid().ToString("N");
+> var context = new ActivityContext(
+>     traceId: ActivityTraceId.CreateFromString(existingTraceId),
+>     spanId: ActivitySpanId.CreateRandom(),
+>     traceFlags: ActivityTraceFlags.Recorded,
+>     isRemote: true);
+> using var activity = activitySource.StartActivity("GetWeatherForecast", ActivityKind.Consumer, context);
+> // ... your code ...
+> ```
+> See [`WeatherWorker.cs`](distributed-app-demo.WorkerService/WeatherWorker.cs) for a complete example.
+
+Activity with existing TraceId:
+
+![existing-span-id](assets/existing-span-id.png)
