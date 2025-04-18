@@ -4,7 +4,7 @@ public class Worker(ILogger<Worker> logger) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        var timer = new PeriodicTimer(TimeSpan.FromSeconds(3));
         while (await timer.WaitForNextTickAsync(stoppingToken))
         {
             if (logger.IsEnabled(LogLevel.Information))

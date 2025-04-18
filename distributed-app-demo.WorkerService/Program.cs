@@ -8,6 +8,7 @@ builder.Services.AddHttpClient("externalapiservice", http => http.BaseAddress = 
 
 builder.Services.AddHostedService<Worker>();
 builder.Services.AddHostedService<WeatherWorker>();
+builder.Services.AddHostedService<MultipleWeatherWorker>();
 
 var host = builder.Build();
 

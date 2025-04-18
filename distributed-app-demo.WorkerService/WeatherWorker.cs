@@ -9,7 +9,7 @@ public class WeatherWorker(IHttpClientFactory httpClientFactory, ILogger<Weather
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        using var timer = new PeriodicTimer(TimeSpan.FromSeconds(10));
+        using var timer = new PeriodicTimer(TimeSpan.FromSeconds(5));
         while (await timer.WaitForNextTickAsync(stoppingToken))
         {
             using (var activity = activitySource.StartActivity("GetWeatherForecast", ActivityKind.Consumer))
