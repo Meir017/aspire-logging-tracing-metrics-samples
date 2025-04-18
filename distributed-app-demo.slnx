@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="distributed-app-demo.ApiService/distributed-app-demo.ApiService.csproj" />
+  <Project Path="distributed-app-demo.AppHost/distributed-app-demo.AppHost.csproj" />
+  <Project Path="distributed-app-demo.ExternalApiService/distributed-app-demo.ExternalApiService.csproj" />
+  <Project Path="distributed-app-demo.ServiceDefaults/distributed-app-demo.ServiceDefaults.csproj" />
+  <Project Path="distributed-app-demo.Web/distributed-app-demo.Web.csproj" />
+  <Project Path="distributed-app-demo.WorkerService/distributed-app-demo.WorkerService.csproj" />
+</Solution>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-distributed_app_demo.WorkerService-d1295ba9-39c0-47ae-9f07-c3c0538416fc</UserSecretsId>
+    <RootNamespace>distributed_app_demo.WorkerService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\distributed-app-demo.ServiceDefaults\distributed-app-demo.ServiceDefaults.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+  </ItemGroup>
+</Project>

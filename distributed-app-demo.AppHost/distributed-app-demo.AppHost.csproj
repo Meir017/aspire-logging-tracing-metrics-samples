@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.2.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>4c7d57b3-2f9e-40a1-8bfa-0e876a476b4f</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\distributed-app-demo.ApiService\distributed-app-demo.ApiService.csproj" />
+    <ProjectReference Include="..\distributed-app-demo.ExternalApiService\distributed-app-demo.ExternalApiService.csproj" />
+    <ProjectReference Include="..\distributed-app-demo.Web\distributed-app-demo.Web.csproj" />
+    <ProjectReference Include="..\distributed-app-demo.WorkerService\distributed-app-demo.WorkerService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" />
+  </ItemGroup>
+
+</Project>

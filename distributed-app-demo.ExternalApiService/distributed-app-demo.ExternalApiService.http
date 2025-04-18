@@ -1,0 +1,6 @@
+@distributed_app_demo.ExternalApiService_HostAddress = http://localhost:5062
+
+GET {{distributed_app_demo.ExternalApiService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
